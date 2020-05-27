@@ -25,19 +25,19 @@ $TIME_ZONE |所在时区| Asia/Shanghai
 
 变量名 | 描述 | 默认值
 ------------ | ------------- | -------------
-$DB_URL | MYSQL数据库地址 | DB_URL='user:password@tcp(192.168.10.100:3306)/kingfisher'
-$LISTEN | 监听地址 | LISTEN=0.0.0.0
-$PORT | 监听端口 | PORT=8080
-$RABBITMQ_URL | rabbitmq地址 | RABBITMQ_URL='amqp://user:password@king-rabbitmq:5672/'
+$DB_URL | MYSQL数据库地址 | 'user:password@tcp(192.168.10.100:3306)/kingfisher'
+$LISTEN | 监听地址 | 0.0.0.0
+$PORT | 监听端口 | 8080
+$RABBITMQ_URL | rabbitmq地址 | 'amqp://user:password@king-rabbitmq:5672/'
 
 ### king-k8s
 变量名 | 描述 | 默认值
 ------------ | ------------- | -------------
-$DB_URL | MYSQL数据库地址 | DB_URL='user:password@tcp(192.168.10.100:3306)/kingfisher'
-$LISTEN | 监听地址 | LISTEN=0.0.0.0
-$PORT | http监听端口 | PORT=8080
-$RPCPORT | GRPC监听端口 | RPCPORT=50000
-$RABBITMQ_URL | rabbitmq地址 | RABBITMQ_URL='amqp://user:password@king-rabbitmq:5672/'
+$DB_URL | MYSQL数据库地址 | 'user:password@tcp(192.168.10.100:3306)/kingfisher'
+$LISTEN | 监听地址 | 0.0.0.0
+$PORT | http监听端口 | 8080
+$RPCPORT | GRPC监听端口 | 50000
+$RABBITMQ_URL | rabbitmq地址 | 'amqp://user:password@king-rabbitmq:5672/'
 
 ### king-kubectl 
 变量名 | 描述 | 默认值
@@ -58,19 +58,19 @@ $DOMAIN | kingfisher平台UI域名 | DOMAIN="kingfisher.com"
 
 变量名 | 描述 | 默认值
 ------------ | ------------- | -------------
-$DB_URL || DB_URL='user:password@tcp(192.168.10.100:3306)/kingfisher'
-$LISTEN || LISTEN=0.0.0.0
-$PORT || PORT=8080
-$RABBITMQ_URL || RABBITMQ_URL='amqp://user:password@king-rabbitmq:5672/'
+$DB_URL || 'user:password@tcp(192.168.10.100:3306)/kingfisher'
+$LISTEN || 0.0.0.0
+$PORT || 8080
+$RABBITMQ_URL || 'amqp://user:password@king-rabbitmq:5672/'
 
 ### king-kf
 
 变量名 | 描述 | 默认值
 ------------ | ------------- | -------------
-$DB_URL | MYSQL数据库地址 | DB_URL='user:password@tcp(192.168.10.100:3306)/kingfisher'
-$LISTEN | 监听地址 | LISTEN=0.0.0.0
-$PORT | 监听端口 | PORT=8080
-$RABBITMQ_URL | rabbitmq地址 | RABBITMQ_URL='amqp://user:password@king-rabbitmq:5672/'
+$DB_URL | MYSQL数据库地址 | 'user:password@tcp(192.168.10.100:3306)/kingfisher'
+$LISTEN | 监听地址 | 0.0.0.0
+$PORT | 监听端口 | 8080
+$RABBITMQ_URL | rabbitmq地址 | 'amqp://user:password@king-rabbitmq:5672/'
 
 ### king-preset 
 
