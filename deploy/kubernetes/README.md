@@ -6,9 +6,7 @@
 
 ```
 /bin/bash webhook-create-signed-cert.sh
-
 /bin/bash  webhook-patch-ca-bundle.sh
-
 kubectl apply -f . 
 ```
 
