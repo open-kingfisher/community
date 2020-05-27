@@ -48,7 +48,7 @@ $KUBECTL_URL | kubectl命令下载地址 | https://storage.googleapis.com/kubern
 
 变量名 | 描述 | 默认值
 ------------ | ------------- | -------------
-$DOMAIN | kingfisher平台UI域名 | DOMAIN="kingfisher.com"
+$DOMAIN | kingfisher平台UI域名 | "kingfisher.com"
 
 ```
 注意：此处要与frontend的ingress配置域名相同，请修改king-frontend.yaml中的域名字段
