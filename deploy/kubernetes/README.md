@@ -56,10 +56,10 @@ $DOMAIN | kingfisher平台UI域名 | "kingfisher.com"
 
 变量名 | 描述 | 默认值
 ------------ | ------------- | -------------
-$DB_URL || 'user:password@tcp(192.168.10.100:3306)/kingfisher'
-$LISTEN || 0.0.0.0
-$PORT || 8080
-$RABBITMQ_URL || 'amqp://user:password@king-rabbitmq:5672/'
+$DB_URL | MYSQL数据库地址 | 'user:password@tcp(192.168.10.100:3306)/kingfisher'
+$LISTEN | 监听地址 | 0.0.0.0
+$PORT | 监听端口 | 8080
+$RABBITMQ_URL | rabbitmq地址 | 'amqp://user:password@king-rabbitmq:5672/'
 
 ### king-kf
 

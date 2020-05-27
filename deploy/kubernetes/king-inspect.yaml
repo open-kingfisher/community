@@ -46,7 +46,7 @@ spec:
             memory: 512Mi
         env:
         - name: DB_URL
-          value: 'root:kingfisher@tcp(mysql-mysql:3306)/kingfisher'
+          value: 'root:kingfisher@tcp(king-mysql:3306)/kingfisher'
         - name: LISTEN
           value: '0.0.0.0'
         - name: PORT
