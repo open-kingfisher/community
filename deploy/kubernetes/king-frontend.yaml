@@ -1,0 +1,82 @@
+kind: "Deployment"
+apiVersion: "apps/v1"
+metadata: 
+  name: "king-frontend"
+  namespace: "kingfisher-system"
+  labels: 
+    app: "king-frontend"
+spec: 
+  replicas: 1
+  selector: 
+    matchLabels: 
+      app: "king-frontend"
+  template: 
+    metadata: 
+      labels: 
+        app: "king-frontend"
+    spec: 
+      containers: 
+      - name: "king-frontend"
+        image: "openkingfisher/king-frontend:latest"
+        env:
+        - name: DOMAIN
+          value: kingfisher.com.cn
+        resources: 
+          limits: 
+            cpu: "1"
+            memory: "1Gi"
+          requests: 
+            cpu: "500m"
+            memory: "512Mi"
+        livenessProbe: 
+          tcpSocket: 
+            port: 80
+          initialDelaySeconds: 1
+          timeoutSeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe: 
+          tcpSocket: 
+            port: 80
+          initialDelaySeconds: 1
+          timeoutSeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        imagePullPolicy: "IfNotPresent"
+      restartPolicy: "Always"
+      terminationGracePeriodSeconds: 30
+---
+kind: "Service"
+apiVersion: "v1"
+metadata: 
+  name: "king-frontend"
+  namespace: "kingfisher-system"
+spec: 
+  ports: 
+  - name: "http"
+    protocol: "TCP"
+    port: 80
+    targetPort: 80
+  selector: 
+    app: "king-frontend"
+  type: "ClusterIP"
+---
+kind: "Ingress"
+apiVersion: "extensions/v1beta1"
+metadata: 
+  name: "kingfisher-ingress"
+  namespace: "kingfisher-system"
+  annotations: 
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "36000"
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
+spec: 
+  rules: 
+  - host: "kingfisher.com.cn"
+    http: 
+      paths: 
+      - path: "/"
+        backend: 
+          serviceName: "king-frontend"
+          servicePort: 80

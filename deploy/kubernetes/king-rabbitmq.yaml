@@ -1,0 +1,80 @@
+kind: "Deployment"
+apiVersion: "apps/v1"
+metadata:
+  name: "king-rabbitmq"
+  namespace: "kingfisher-system"
+  labels:
+    app: "king-rabbitmq"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "king-rabbitmq"
+  template:
+    metadata:
+      labels:
+        app: "king-rabbitmq"
+    spec:
+      containers:
+      - name: "king-rabbitmq"
+        image: "rabbitmq:3-management"
+        ports:
+        - containerPort: 15672
+          protocol: "TCP"
+        - containerPort: 5672
+          protocol: "TCP"
+        env:
+        - name: "RABBITMQ_DEFAULT_USER"
+          valueFrom:
+            secretKeyRef:
+              name: "king-rabbitmq"
+              key: "username"
+        - name: "RABBITMQ_DEFAULT_PASS"
+          valueFrom:
+            secretKeyRef:
+              name: "king-rabbitmq"
+              key: "password"
+        livenessProbe:
+          tcpSocket:
+            port: 5672
+          initialDelaySeconds: 1
+          timeoutSeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          tcpSocket:
+            port: 5672
+          initialDelaySeconds: 1
+          timeoutSeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+---
+kind: "Secret"
+apiVersion: "v1"
+metadata:
+  name: "king-rabbitmq"
+  namespace: "kingfisher-system"
+data:
+  password: "a2luZ2Zpc2hlcg=="
+  username: "a2luZ2Zpc2hlcg=="
+type: "Opaque"
+---
+kind: "Service"
+apiVersion: "v1"
+metadata:
+  name: "king-rabbitmq"
+  namespace: "kingfisher-system"
+spec:
+  ports:
+  - name: "manage"
+    protocol: "TCP"
+    port: 15672
+    targetPort: 15672
+  - name: "server"
+    protocol: "TCP"
+    port: 5672
+    targetPort: 5672
+  selector:
+    app: "king-rabbitmq"

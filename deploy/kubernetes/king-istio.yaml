@@ -2,22 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: king-inspect
-  name: king-inspect
+    app: king-istio
+  name: king-istio
   namespace: kingfisher-system
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: king-inspect
+      app: king-istio
   template:
     metadata:
       labels:
-        app: king-inspect
+        app: king-istio
     spec:
       containers:
-      - image: openkingfisher/king-inspect:latest
-        name: king-inspect
+      - image: openkingfisher/king-istio:latest
+        name: king-istio
         ports:
         - containerPort: 8080
           name: http
@@ -57,13 +57,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: king-inspect
+  name: king-istio
   namespace: kingfisher-system
 spec:
   ports:
-  - name: king-inspect
+  - name: king-istio
     port: 8080
     targetPort: 8080
   selector:
-    app: king-inspect
+    app: king-istio
   sessionAffinity: ClientIP

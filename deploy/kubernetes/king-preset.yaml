@@ -1,0 +1,101 @@
+kind: "Deployment"
+apiVersion: "apps/v1"
+metadata: 
+  name: "king-preset"
+  namespace: "kingfisher-system"
+  labels: 
+    app: "king-preset"
+spec: 
+  replicas: 1
+  selector: 
+    matchLabels: 
+      app: "king-preset"
+  template: 
+    metadata: 
+      labels: 
+        app: "king-preset"
+    spec: 
+      volumes: 
+      - name: "preset"
+        secret: 
+          secretName: "king-preset"
+          defaultMode: 420
+      containers: 
+      - name: "king-preset"
+        image: "openkingfisher/king-preset:latest"
+        volumeMounts: 
+        - name: "preset"
+          readOnly: true
+          mountPath: "/etc/webhook/certs"
+        imagePullPolicy: "IfNotPresent"
+      restartPolicy: "Always"
+      terminationGracePeriodSeconds: 30
+  strategy: 
+    type: "RollingUpdate"
+    rollingUpdate: 
+      maxUnavailable: "25%"
+      maxSurge: "25%"
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+---
+kind: "Service"
+apiVersion: "v1"
+metadata: 
+  name: "king-preset"
+  namespace: "kingfisher-system"
+  labels: 
+    app: "king-preset"
+spec: 
+  ports: 
+  - protocol: "TCP"
+    port: 443
+    targetPort: 443
+  selector: 
+    app: "king-preset"
+  type: "ClusterIP"
+---
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: king-preset
+  labels:
+    app: king-preset
+webhooks:
+  - name: fix.pod.ip
+    clientConfig:
+      service:
+        name: king-preset
+        namespace: kingfisher
+        path: "/preset/api/v1.10/validate/fixpodip"
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5RENDQWJDZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJd01ESXlOREF6TlRRek9Wb1hEVE13TURJeU1UQXpOVFF6T1Zvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBS21ZCjBydGtGSlE2ckMzSjlwbTJnTWNLM3JBa1o2U1VoMk0vdlF3elJrV1dPZWl4SmYyeTBuN1djRTJRM3ZHNkticEwKcldoNmdXUmNJNExsMCtDMnVSNXhBZXpDUXM1alhuREpkeWFVQWhsR2NWOGNNd2hFVkRtejU3ZE9KQjdvS3BjVwpodStTV1EwZXVLaktkdEExTU5IcWVxSzNmZ1lFVk9ndE5KU29haFVFTG05OUtWM3UrWEM2c3c1MXNwSVhaQ1pYCmhMTzdmNWpiVzd5LzE4aXB2TExrZ1htOUtBZHEyTUJRQXRmRFZ5bmRmNGNkYS9EN2ZKUXhvVWhHc3V4T25HamgKTzVIclE4b0ZEdFBFSDRaWVoyVHlGNlZ1MFovVTRKU1VUZ3dBOXEzM2x6dTUrVmZ3dkg4b21xWkRmMWxRWStLSApBNFF5b3JyY0NPZkRIcWFBQXZzQ0F3RUFBYU1qTUNFd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFEdDMxK0puQXhveUZIZWpaUlFqemdNN0RQTkMKNHZzRmVNNHkvTUhmWGx3ZmIxOUUxRS9FUi9iQmw4SkRla0RxRUYvRFRQSjNqSUluRVRiR3NHSGNYVWdPMWJGZgpmcUI3bHo1K1p0RUU0dzkwZW1lOVVWM2dYRVR1S3ZHa1FubWY3U2Y1d2VPTmFTWFNGUzI0TkV2VUFLQUxSNmo1Cmk1VFFBNnRlOXd2MFZCSCtTaHlPU0Q3VUp1ZG1PSkEySVU1Z3hXczJ4K0s2Q0R3bUpJMXVkOWpCQWFBcFNvRVEKU3F4ZGxZbUtoUnF2dVEzcExDNHhCZjVFZFd3cis5MkJiaklJbGloZ2VQcTdxOW13a3RSMGNac0J3aUxDY1VIYgpRZXJSbnJLOE5IU0pjaGRkbnRVMWsyVGlIRm5XM0psNHhhRS84QktldStDaHBLcktQVHQ0bThiTWR2MD0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    rules:
+      - operations: ["CREATE","UPDATE"]
+        apiGroups: ["apps",""]
+        apiVersions: ["v1","v1beta1"]
+        resources: ["statefulsets"]
+    objectSelector:
+      matchLabels:
+        fix-pod-ip: enabled
+---
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: king-preset
+  labels:
+    app: king-preset
+webhooks:
+  - name: fix.pod.ip
+    clientConfig:
+      service:
+        name: king-preset
+        namespace: kingfisher
+        path: "/preset/api/v1.10/mutate/fixpodip"
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5RENDQWJDZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJd01ESXlOREF6TlRRek9Wb1hEVE13TURJeU1UQXpOVFF6T1Zvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBS21ZCjBydGtGSlE2ckMzSjlwbTJnTWNLM3JBa1o2U1VoMk0vdlF3elJrV1dPZWl4SmYyeTBuN1djRTJRM3ZHNkticEwKcldoNmdXUmNJNExsMCtDMnVSNXhBZXpDUXM1alhuREpkeWFVQWhsR2NWOGNNd2hFVkRtejU3ZE9KQjdvS3BjVwpodStTV1EwZXVLaktkdEExTU5IcWVxSzNmZ1lFVk9ndE5KU29haFVFTG05OUtWM3UrWEM2c3c1MXNwSVhaQ1pYCmhMTzdmNWpiVzd5LzE4aXB2TExrZ1htOUtBZHEyTUJRQXRmRFZ5bmRmNGNkYS9EN2ZKUXhvVWhHc3V4T25HamgKTzVIclE4b0ZEdFBFSDRaWVoyVHlGNlZ1MFovVTRKU1VUZ3dBOXEzM2x6dTUrVmZ3dkg4b21xWkRmMWxRWStLSApBNFF5b3JyY0NPZkRIcWFBQXZzQ0F3RUFBYU1qTUNFd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFEdDMxK0puQXhveUZIZWpaUlFqemdNN0RQTkMKNHZzRmVNNHkvTUhmWGx3ZmIxOUUxRS9FUi9iQmw4SkRla0RxRUYvRFRQSjNqSUluRVRiR3NHSGNYVWdPMWJGZgpmcUI3bHo1K1p0RUU0dzkwZW1lOVVWM2dYRVR1S3ZHa1FubWY3U2Y1d2VPTmFTWFNGUzI0TkV2VUFLQUxSNmo1Cmk1VFFBNnRlOXd2MFZCSCtTaHlPU0Q3VUp1ZG1PSkEySVU1Z3hXczJ4K0s2Q0R3bUpJMXVkOWpCQWFBcFNvRVEKU3F4ZGxZbUtoUnF2dVEzcExDNHhCZjVFZFd3cis5MkJiaklJbGloZ2VQcTdxOW13a3RSMGNac0J3aUxDY1VIYgpRZXJSbnJLOE5IU0pjaGRkbnRVMWsyVGlIRm5XM0psNHhhRS84QktldStDaHBLcktQVHQ0bThiTWR2MD0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    rules:
+      - operations: ["CREATE","UPDATE"]
+        apiGroups: ["apps", ""]
+        apiVersions: ["v1","v1beta1"]
+        resources: ["pods"]
+    objectSelector:
+      matchLabels:
+        fix-pod-ip: enabled
