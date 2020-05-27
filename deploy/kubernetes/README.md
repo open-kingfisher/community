@@ -25,30 +25,34 @@ $TIME_ZONE |所在时区| Asia/Shanghai
 
 变量名 | 描述 | 默认值
 ------------ | ------------- | -------------
-$DB_URL || DB_URL='user:password@tcp(192.168.10.100:3306)/kingfisher'
-$LISTEN || LISTEN=0.0.0.0
-$PORT || PORT=8080
-$RABBITMQ_URL || RABBITMQ_URL='amqp://user:password@king-rabbitmq:5672/'
+$DB_URL | MYSQL数据库地址 | DB_URL='user:password@tcp(192.168.10.100:3306)/kingfisher'
+$LISTEN | 监听地址 | LISTEN=0.0.0.0
+$PORT | 监听端口 | PORT=8080
+$RABBITMQ_URL | rabbitmq地址 | RABBITMQ_URL='amqp://user:password@king-rabbitmq:5672/'
 
 ### king-k8s
 变量名 | 描述 | 默认值
 ------------ | ------------- | -------------
-$DB_URL || DB_URL='user:password@tcp(192.168.10.100:3306)/kingfisher'
-$LISTEN || LISTEN=0.0.0.0
-$PORT || PORT=8080
-$RPCPORT || RPCPORT=50000
-$RABBITMQ_URL || RABBITMQ_URL='amqp://user:password@king-rabbitmq:5672/'
+$DB_URL | MYSQL数据库地址 | DB_URL='user:password@tcp(192.168.10.100:3306)/kingfisher'
+$LISTEN | 监听地址 | LISTEN=0.0.0.0
+$PORT | http监听端口 | PORT=8080
+$RPCPORT | GRPC监听端口 | RPCPORT=50000
+$RABBITMQ_URL | rabbitmq地址 | RABBITMQ_URL='amqp://user:password@king-rabbitmq:5672/'
 
 ### king-kubectl 
 变量名 | 描述 | 默认值
 ------------ | ------------- | -------------
-$KUBECTL_URL || https://storage.googleapis.com/kubernetes-release/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl
+$KUBECTL_URL | kubectl命令下载地址 | https://storage.googleapis.com/kubernetes-release/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl
 
 ### king-frontend 
 
 变量名 | 描述 | 默认值
 ------------ | ------------- | -------------
-$DOMAIN || DOMAIN="kingfisher.com"
+$DOMAIN | kingfisher平台UI域名 | DOMAIN="kingfisher.com"
+
+```
+注意：此处要与frontend的ingress配置域名相同，请修改king-frontend.yaml中的域名字段
+```
 
 ### king-istio
 
@@ -63,10 +67,10 @@ $RABBITMQ_URL || RABBITMQ_URL='amqp://user:password@king-rabbitmq:5672/'
 
 变量名 | 描述 | 默认值
 ------------ | ------------- | -------------
-$DB_URL || DB_URL='user:password@tcp(192.168.10.100:3306)/kingfisher'
-$LISTEN || LISTEN=0.0.0.0
-$PORT || PORT=8080
-$RABBITMQ_URL || RABBITMQ_URL='amqp://user:password@king-rabbitmq:5672/'
+$DB_URL | MYSQL数据库地址 | DB_URL='user:password@tcp(192.168.10.100:3306)/kingfisher'
+$LISTEN | 监听地址 | LISTEN=0.0.0.0
+$PORT | 监听端口 | PORT=8080
+$RABBITMQ_URL | rabbitmq地址 | RABBITMQ_URL='amqp://user:password@king-rabbitmq:5672/'
 
 ### king-preset 
 
