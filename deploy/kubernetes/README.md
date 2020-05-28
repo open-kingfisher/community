@@ -45,8 +45,7 @@ $MYSQL_PASSWORD | MYSQL密码| kingfisher
 $MYSQL_HOST | MYSQL主机 | mysql
 $MYSQL_PORT | MYSQL端口 | 3306
 $MYSQL_DB | 数据库名 | kingfisher
-$DB_URL | 完整MYSQL请求地址（注：选填以该参数为最高优先级） | MYSQL_USER}:${MYSQL_PASSWORD}@tcp(${MYSQL_HOST}:${MYSQL_PORT})/${MYSQL_DB
-}
+$DB_URL | 完整MYSQL请求地址（注：选填以该参数为最高优先级） | MYSQL_USER}:${MYSQL_PASSWORD}@tcp(${MYSQL_HOST}:${MYSQL_PORT})/${MYSQL_DB}
 $MQ_USER | RabbiMQ用户名 | kingfisher
 $MQ_PASSWORD | RabbiMQ密码 | kingfisher
 $MQ_HOST | RabbiMQ主机 | king-rabbitmq
@@ -80,8 +79,7 @@ $MYSQL_PASSWORD | MYSQL密码| kingfisher
 $MYSQL_HOST | MYSQL主机 | mysql
 $MYSQL_PORT | MYSQL端口 | 3306
 $MYSQL_DB | 数据库名 | kingfisher
-$DB_URL | 完整MYSQL请求地址（注：选填以该参数为最高优先级） | MYSQL_USER}:${MYSQL_PASSWORD}@tcp(${MYSQL_HOST}:${MYSQL_PORT})/${MYSQL_DB
-}
+$DB_URL | 完整MYSQL请求地址（注：选填以该参数为最高优先级） | MYSQL_USER}:${MYSQL_PASSWORD}@tcp(${MYSQL_HOST}:${MYSQL_PORT})/${MYSQL_DB}
 $MQ_USER | RabbiMQ用户名 | kingfisher
 $MQ_PASSWORD | RabbiMQ密码 | kingfisher
 $MQ_HOST | RabbiMQ主机 | king-rabbitmq
@@ -99,8 +97,7 @@ $MYSQL_PASSWORD | MYSQL密码| kingfisher
 $MYSQL_HOST | MYSQL主机 | mysql
 $MYSQL_PORT | MYSQL端口 | 3306
 $MYSQL_DB | 数据库名 | kingfisher
-$DB_URL | 完整MYSQL请求地址（注：选填以该参数为最高优先级） | MYSQL_USER}:${MYSQL_PASSWORD}@tcp(${MYSQL_HOST}:${MYSQL_PORT})/${MYSQL_DB
-}
+$DB_URL | 完整MYSQL请求地址（注：选填以该参数为最高优先级） | MYSQL_USER}:${MYSQL_PASSWORD}@tcp(${MYSQL_HOST}:${MYSQL_PORT})/${MYSQL_DB}
 $MQ_USER | RabbiMQ用户名 | kingfisher
 $MQ_PASSWORD | RabbiMQ密码 | kingfisher
 $MQ_HOST | RabbiMQ主机 | king-rabbitmq
