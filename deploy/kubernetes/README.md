@@ -23,19 +23,39 @@ $TIME_ZONE |所在时区| Asia/Shanghai
 
 变量名 | 描述 | 默认值
 ------------ | ------------- | -------------
-$DB_URL | MYSQL数据库地址 | 'user:password@tcp(192.168.10.100:3306)/kingfisher'
+$MYSQL_USER | MYSQL用户名 | MYSQL_USER='root'
+$MYSQL_PASSWORD | MYSQL密码| MYSQL_PASSWORD='kingfisher'
+$MYSQL_HOST | MYSQL主机 | MYSQL_HOST='mysql'
+$MYSQL_PORT | MYSQL端口 | PORT="3306"
+$MYSQL_DB | 数据库名 | DB="kingfisher"
+$DB_URL | 完整MYSQL请求地址（注：选填以该参数为最高优先级） | DB_URL="${MYSQL_USER}:${MYSQL_PASSWORD}@tcp(${MYSQL_HOST}:${MYSQL_PORT})/${MYSQL_DB}"
+$MQ_USER | RabbiMQ用户名 | MQ_USER=kingfisher
+$MQ_PASSWORD | RabbiMQ密码 | MQ_PASSWORD=kingfisher
+$MQ_HOST | RabbiMQ主机 | MQ_HOST=king-rabbitmq
+$MQ_PORT | RabbiMQ端口 | MQ_PORT=5672
+$RABBITMQ_URL | RabbiMQ请求地址（注：选填以该参数为最高优先级） | RABBITMQ_URL="amqp://${MQ_USER}:${MQ_PASSWORD}@${MQ_HOST}:${MQ_PORT}/"
 $LISTEN | 监听地址 | 0.0.0.0
 $PORT | 监听端口 | 8080
-$RABBITMQ_URL | rabbitmq地址 | 'amqp://user:password@king-rabbitmq:5672/'
 
 ### king-k8s
 变量名 | 描述 | 默认值
 ------------ | ------------- | -------------
-$DB_URL | MYSQL数据库地址 | 'user:password@tcp(192.168.10.100:3306)/kingfisher'
+$MYSQL_USER | MYSQL用户名 | MYSQL_USER='root'
+$MYSQL_PASSWORD | MYSQL密码| MYSQL_PASSWORD='kingfisher'
+$MYSQL_HOST | MYSQL主机 | MYSQL_HOST='mysql'
+$MYSQL_PORT | MYSQL端口 | PORT="3306"
+$MYSQL_DB | 数据库名 | DB="kingfisher"
+$DB_URL | 完整MYSQL请求地址（注：选填以该参数为最高优先级） | DB_URL="${MYSQL_USER}:${MYSQL_PASSWORD}@tcp(${MYSQL_HOST}:${MYSQL_PORT})/
+${MYSQL_DB}"
+$MQ_USER | RabbiMQ用户名 | MQ_USER=kingfisher
+$MQ_PASSWORD | RabbiMQ密码 | MQ_PASSWORD=kingfisher
+$MQ_HOST | RabbiMQ主机 | MQ_HOST=king-rabbitmq
+$MQ_PORT | RabbiMQ端口 | MQ_PORT=5672
+$RABBITMQ_URL | RabbiMQ请求地址（注：选填以该参数为最高优先级） | RABBITMQ_URL="amqp://${MQ_USER}:${MQ_PASSWORD}@${MQ_HOST}:${MQ_PORT}/
+"
 $LISTEN | 监听地址 | 0.0.0.0
 $PORT | http监听端口 | 8080
 $RPCPORT | GRPC监听端口 | 50000
-$RABBITMQ_URL | rabbitmq地址 | 'amqp://user:password@king-rabbitmq:5672/'
 
 ### king-kubectl 
 变量名 | 描述 | 默认值
@@ -56,19 +76,41 @@ $DOMAIN | kingfisher平台UI域名 | "kingfisher.com"
 
 变量名 | 描述 | 默认值
 ------------ | ------------- | -------------
-$DB_URL | MYSQL数据库地址 | 'user:password@tcp(192.168.10.100:3306)/kingfisher'
+$MYSQL_USER | MYSQL用户名 | MYSQL_USER='root'
+$MYSQL_PASSWORD | MYSQL密码| MYSQL_PASSWORD='kingfisher'
+$MYSQL_HOST | MYSQL主机 | MYSQL_HOST='mysql'
+$MYSQL_PORT | MYSQL端口 | PORT="3306"
+$MYSQL_DB | 数据库名 | DB="kingfisher"
+$DB_URL | 完整MYSQL请求地址（注：选填以该参数为最高优先级） | DB_URL="${MYSQL_USER}:${MYSQL_PASSWORD}@tcp(${MYSQL_HOST}:${MYSQL_PORT})/
+${MYSQL_DB}"
+$MQ_USER | RabbiMQ用户名 | MQ_USER=kingfisher
+$MQ_PASSWORD | RabbiMQ密码 | MQ_PASSWORD=kingfisher
+$MQ_HOST | RabbiMQ主机 | MQ_HOST=king-rabbitmq
+$MQ_PORT | RabbiMQ端口 | MQ_PORT=5672
+$RABBITMQ_URL | RabbiMQ请求地址（注：选填以该参数为最高优先级） | RABBITMQ_URL="amqp://${MQ_USER}:${MQ_PASSWORD}@${MQ_HOST}:${MQ_PORT}/
+"
 $LISTEN | 监听地址 | 0.0.0.0
 $PORT | 监听端口 | 8080
-$RABBITMQ_URL | rabbitmq地址 | 'amqp://user:password@king-rabbitmq:5672/'
 
 ### king-kf
 
 变量名 | 描述 | 默认值
 ------------ | ------------- | -------------
-$DB_URL | MYSQL数据库地址 | 'user:password@tcp(192.168.10.100:3306)/kingfisher'
+$MYSQL_USER | MYSQL用户名 | MYSQL_USER='root'
+$MYSQL_PASSWORD | MYSQL密码| MYSQL_PASSWORD='kingfisher'
+$MYSQL_HOST | MYSQL主机 | MYSQL_HOST='mysql'
+$MYSQL_PORT | MYSQL端口 | PORT="3306"
+$MYSQL_DB | 数据库名 | DB="kingfisher"
+$DB_URL | 完整MYSQL请求地址（注：选填以该参数为最高优先级） | DB_URL="${MYSQL_USER}:${MYSQL_PASSWORD}@tcp(${MYSQL_HOST}:${MYSQL_PORT})/
+${MYSQL_DB}"
+$MQ_USER | RabbiMQ用户名 | MQ_USER=kingfisher
+$MQ_PASSWORD | RabbiMQ密码 | MQ_PASSWORD=kingfisher
+$MQ_HOST | RabbiMQ主机 | MQ_HOST=king-rabbitmq
+$MQ_PORT | RabbiMQ端口 | MQ_PORT=5672
+$RABBITMQ_URL | RabbiMQ请求地址（注：选填以该参数为最高优先级） | RABBITMQ_URL="amqp://${MQ_USER}:${MQ_PASSWORD}@${MQ_HOST}:${MQ_PORT}/
+"
 $LISTEN | 监听地址 | 0.0.0.0
 $PORT | 监听端口 | 8080
-$RABBITMQ_URL | rabbitmq地址 | 'amqp://user:password@king-rabbitmq:5672/'
 
 ### king-preset 
 
